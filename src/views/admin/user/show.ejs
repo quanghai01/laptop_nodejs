@@ -1,0 +1,111 @@
+<%- include('../layout/head.ejs') %>
+
+    <body>
+        <%- include('../layout/sidebar.ejs') %>
+            <div id="content">
+                <%- include('../layout/navbar.ejs') %>
+                    <div class="main-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+                            <div>
+                                <h2 class="fw-bold mb-1">User</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="/admin/dashboard"
+                                                class="text-decoration-none text-secondary">Dashboard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">User</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <a href="/create-user" class="btn btn-primary">Create User</a>
+                        </div>
+                        <div class="row g-4 mb-4">
+                            <div class="col-12">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body p-0">
+                                        <table class="table table-premium mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>User</th>
+                                                    <th>Contact</th>
+                                                    <th>Details</th>
+                                                    <th class="text-center">Account Type</th>
+                                                    <th class="text-center">Avatar</th>
+                                                    <th class="text-end">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% users.forEach(user=> { %>
+                                                    <tr>
+                                                        <td class="fw-medium text-secondary">
+                                                            #<%= user.id %>
+                                                        </td>
+                                                        <td>
+                                                            <div class="fw-bold text-dark">
+                                                                <%= user.fullname %>
+                                                            </div>
+                                                            <div class="small text-muted">@<%= user.username %>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="small"><i
+                                                                    class="fa-solid fa-phone me-1 text-muted"></i>
+                                                                <%= user.phone %>
+                                                            </div>
+                                                            <div class="small text-muted"><i
+                                                                    class="fa-solid fa-location-dot me-1"></i>
+                                                                <%= user.address %>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="small text-muted">PW: <span
+                                                                    class="text-dark">••••••••</span></div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <% if (user.accountType===ACCOUNT_TYPE.SYSTEM) { %>
+                                                                <span
+                                                                    class="badge badge-soft-danger rounded-pill">System</span>
+                                                                <% } else if (user.accountType===ACCOUNT_TYPE.GOOGLE) {
+                                                                    %>
+                                                                    <span
+                                                                        class="badge badge-soft-primary rounded-pill">Google</span>
+                                                                    <% } else if
+                                                                        (user.accountType===ACCOUNT_TYPE.GITHUB) { %>
+                                                                        <span
+                                                                            class="badge badge-soft-info rounded-pill">Github</span>
+                                                                        <% } %>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <img src="<%= user.avatar ? (user.avatar.startsWith('http') ? user.avatar : '/images/' + user.avatar) : 'https://i.pravatar.cc/150?u=' + user.id %>"
+                                                                alt="avatar" class="table-avatar">
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <div class="d-flex gap-2 justify-content-end">
+                                                                <a class="btn btn-action btn-soft-primary"
+                                                                    href="/update-user/<%= user.id %>" title="Edit">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </a>
+                                                                <form action="/delete-user/<%= user.id %>" method="POST"
+                                                                    class="d-inline">
+                                                                    <button class="btn btn-action btn-soft-danger"
+                                                                        type="submit" title="Delete"
+                                                                        onclick="return confirm('Are you sure?')">
+                                                                        <i class="fa-solid fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <%- include('../layout/scripts.ejs') %>
+    </body>
+
+    </html>

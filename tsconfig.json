@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "app/*": [
+        "./src/app/*"
+      ],
+      "config/*": [
+        "./src/config/*"
+      ],
+      "controllers/*": [
+        "./src/controllers/*"
+      ],
+      "services/*": [
+        "./src/services/*"
+      ],
+      "views/*": [
+        "./src/views/*"
+      ]
+    },
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

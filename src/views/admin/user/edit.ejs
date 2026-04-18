@@ -1,0 +1,83 @@
+<%- include('../layout/head.ejs') %>
+
+    <body>
+        <%- include('../layout/sidebar.ejs') %>
+            <div id="content">
+                <%- include('../layout/navbar.ejs') %>
+                    <div class="main-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+                            <div>
+                                <h2 class="fw-bold mb-1">Edit User</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="/admin/dashboard"
+                                                class="text-decoration-none text-secondary">Dashboard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">User</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="row g-4 mb-4">
+                            <div class="col-12">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body">
+                                        <form action="/handle-update-user" method="post">
+                                            <h1>Edit User</h1>
+                                            <input type="hidden" name="id" value="<%= user.id %>">
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Username</label>
+                                                <input type="text" class="form-control" id="username" name="username"
+                                                    value="<%= user.username %>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password" placeholder="Leave empty to keep current password">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="fullname" class="form-label">Name</label>
+                                                <input type="text" class="form-control" id="fullname" name="fullname"
+                                                    value="<%= user.fullname %>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address"
+                                                    value="<%= user.address %>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Phone</label>
+                                                <input type="text" class="form-control" id="phone" name="phone"
+                                                    value="<%= user.phone %>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="accountType" class="form-label">Account Type</label>
+                                                <select class="form-select" id="accountType" name="accountType">
+                                                    <option value="<%= ACCOUNT_TYPE.SYSTEM %>"
+                                                        <%=user.accountType===ACCOUNT_TYPE.SYSTEM ? 'selected' : '' %>
+                                                        >System</option>
+                                                    <option value="<%= ACCOUNT_TYPE.GOOGLE %>"
+                                                        <%=user.accountType===ACCOUNT_TYPE.GOOGLE ? 'selected' : '' %>
+                                                        >Google</option>
+                                                    <option value="<%= ACCOUNT_TYPE.GITHUB %>"
+                                                        <%=user.accountType===ACCOUNT_TYPE.GITHUB ? 'selected' : '' %>
+                                                        >Github</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="avatar" class="form-label">Avatar</label>
+                                                <input type="text" class="form-control" id="avatar" name="avatar"
+                                                    value="<%= user.avatar %>">
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Update</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <%- include('../layout/scripts.ejs') %>
+    </body>
+
+    </html>

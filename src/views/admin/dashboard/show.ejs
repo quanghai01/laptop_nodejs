@@ -1,0 +1,219 @@
+<%- include('../layout/head.ejs') %>
+
+    <body>
+
+        <%- include('../layout/sidebar.ejs') %>
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <%- include('../layout/navbar.ejs') %>
+
+                    <div class="main-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+                            <div>
+                                <h2 class="fw-bold mb-1">Dashboard</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#"
+                                                class="text-decoration-none text-secondary">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary shadow-sm"><i class="fas fa-download me-2"></i> Generate
+                                    Report</button>
+                            </div>
+                        </div>
+
+                        <!-- Dashboard Stats -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-12 col-md-6 col-xl-3">
+                                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                                    <div>
+                                        <div class="stat-icon icon-users">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="stat-label">Total Users</div>
+                                        <div class="stat-value">
+                                            <%= stats.users %>
+                                        </div>
+                                    </div>
+                                    <div class="stat-footer">
+                                        <span class="stat-trend-up me-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                                        <span class="text-secondary">vs last month</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ... Product Stat Card ... -->
+                            <div class="col-12 col-md-6 col-xl-3">
+                                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                                    <div>
+                                        <div class="stat-icon icon-products">
+                                            <i class="fas fa-box"></i>
+                                        </div>
+                                        <div class="stat-label">Total Products</div>
+                                        <div class="stat-value">
+                                            <%= stats.products %>
+                                        </div>
+                                    </div>
+                                    <div class="stat-footer">
+                                        <span class="stat-trend-up me-2"><i class="fas fa-arrow-up"></i> 8%</span>
+                                        <span class="text-secondary">vs last month</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ... Order Stat Card ... -->
+                            <div class="col-12 col-md-6 col-xl-3">
+                                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+                                    <div>
+                                        <div class="stat-icon icon-orders">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="stat-label">Total Orders</div>
+                                        <div class="stat-value">
+                                            <%= stats.orders %>
+                                        </div>
+                                    </div>
+                                    <div class="stat-footer">
+                                        <span class="stat-trend-down me-2"><i class="fas fa-arrow-down"></i> 3%</span>
+                                        <span class="text-secondary">vs last month</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ... Role Stat Card ... -->
+                            <div class="col-12 col-md-6 col-xl-3">
+                                <div class="stat-card fade-in" style="animation-delay: 0.4s;">
+                                    <div>
+                                        <div class="stat-icon icon-roles">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="stat-label">Active Roles</div>
+                                        <div class="stat-value">
+                                            <%= stats.roles %>
+                                        </div>
+                                    </div>
+                                    <div class="stat-footer">
+                                        <span class="text-secondary">System roles defined</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Area Section -->
+                        <div class="row g-4 mb-4">
+                            <!-- Recent Activities Table -->
+                            <div class="col-12 col-lg-8">
+                                <div class="card card-table fade-in" style="animation-delay: 0.5s;">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Recent Activities</span>
+                                        <a href="/" class="btn btn-sm btn-outline-primary">View All</a>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Activity</th>
+                                                    <th>User</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>User Registration</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://i.pravatar.cc/150?u=1"
+                                                                class="rounded-circle me-2" width="30" height="30"
+                                                                alt="">
+                                                            <span>John Doe</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%= new Date().toLocaleDateString() %>
+                                                    </td>
+                                                    <td><span
+                                                            class="badge bg-success-subtle text-success border border-success-subtle">Success</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Order Placed</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://i.pravatar.cc/150?u=2"
+                                                                class="rounded-circle me-2" width="30" height="30"
+                                                                alt="">
+                                                            <span>Jane Smith</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%= new Date().toLocaleDateString() %>
+                                                    </td>
+                                                    <td><span
+                                                            class="badge bg-warning-subtle text-warning border border-warning-subtle">Pending</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Product Updated</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://i.pravatar.cc/150?u=admin"
+                                                                class="rounded-circle me-2" width="30" height="30"
+                                                                alt="">
+                                                            <span>Admin</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%= new Date().toLocaleDateString() %>
+                                                    </td>
+                                                    <td><span
+                                                            class="badge bg-info-subtle text-info border border-info-subtle">Completed</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions Panel -->
+                            <div class="col-12 col-lg-4">
+                                <div class="stat-card fade-in" style="animation-delay: 0.6s;">
+                                    <h5 class="fw-bold mb-4">Quick Actions</h5>
+                                    <div class="d-grid gap-3">
+                                        <a href="/create-user"
+                                            class="btn btn-outline-primary text-start p-3 d-flex align-items-center">
+                                            <i class="fas fa-user-plus me-3 fs-5"></i>
+                                            <div>
+                                                <div class="fw-bold">Add New User</div>
+                                                <div class="small text-secondary">Register a new system account</div>
+                                            </div>
+                                        </a>
+                                        <a href="#"
+                                            class="btn btn-outline-success text-start p-3 d-flex align-items-center">
+                                            <i class="fas fa-plus-circle me-3 fs-5"></i>
+                                            <div>
+                                                <div class="fw-bold">Add Product</div>
+                                                <div class="small text-secondary">Listing a new item for sale</div>
+                                            </div>
+                                        </a>
+                                        <a href="#"
+                                            class="btn btn-outline-info text-start p-3 d-flex align-items-center">
+                                            <i class="fas fa-cog me-3 fs-5"></i>
+                                            <div>
+                                                <div class="fw-bold">System Config</div>
+                                                <div class="small text-secondary">Manage platform settings</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+
+
+            <%- include('../layout/scripts.ejs') %>

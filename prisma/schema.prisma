@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id          Int    @id @default(autoincrement())
+  username    String @unique @db.VarChar(255)
+  password    String @db.VarChar(255)
+  fullname    String @db.VarChar(255)
+  address     String @db.VarChar(255)
+  phone       String @db.VarChar(255)
+  accountType String @db.VarChar(255)
+  avatar      String @db.VarChar(255)
+  roleId      Int
+  role        Role   @relation(fields: [roleId], references: [id])
+
+  @@index([roleId], map: "users_roleId_fkey")
+  @@map("users")
+}
+
+model Role {
+  id          Int    @id @default(autoincrement())
+  name        String @unique @db.VarChar(255)
+  description String @db.VarChar(255)
+  users       User[]
+
+  @@map("roles")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String?  @db.VarChar(255)
+  price       Int
+  image       String?  @db.VarChar(255)
+  quantity    Int
+  sold        Int?     @default(0)
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId], map: "products_categoryId_fkey")
+  @@map("products")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(255)
+  description String    @db.VarChar(255)
+  products    Product[]
+
+  @@map("categories")
+}

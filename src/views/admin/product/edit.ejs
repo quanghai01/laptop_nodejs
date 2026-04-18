@@ -1,0 +1,98 @@
+<%- include('../layout/head.ejs') %>
+
+    <body>
+        <%- include('../layout/sidebar.ejs') %>
+            <div id="content">
+                <%- include('../layout/navbar.ejs') %>
+                    <div class="main-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+                            <div>
+                                <h2 class="fw-bold mb-1">Edit Product</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="/admin/dashboard/show"
+                                                class="text-decoration-none text-secondary">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/admin/product"
+                                                class="text-decoration-none text-secondary">Products</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <a href="/admin/product" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back to List</span>
+                            </a>
+                        </div>
+
+                        <div class="card border-0 shadow-sm fade-in-up">
+                            <div class="card-body p-4">
+                                <form action="/admin/product/update/<%= product.id %>" method="POST">
+                                    <div class="row g-4">
+                                        <!-- Product Name -->
+                                        <div class="col-md-8">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label fw-semibold">Product Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>" placeholder="Enter product name" required>
+                                            </div>
+                                            <!-- Description -->
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label fw-semibold">Description</label>
+                                                <textarea class="form-control" id="description" name="description" rows="5" placeholder="Enter product description" required><%= product.description %></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sidebar Info -->
+                                        <div class="col-md-4">
+                                            <!-- Category -->
+                                            <div class="mb-3">
+                                                <label for="categoryId" class="form-label fw-semibold">Category</label>
+                                                <select class="form-select" id="categoryId" name="categoryId" required>
+                                                    <option disabled>Select Category</option>
+                                                    <!-- Note: This would normally logic-heavy with categories from DB -->
+                                                    <option value="1" <%= product.categoryId == 1 ? 'selected' : '' %>>Electronics</option>
+                                                    <option value="2" <%= product.categoryId == 2 ? 'selected' : '' %>>Fashion</option>
+                                                    <option value="3" <%= product.categoryId == 3 ? 'selected' : '' %>>Home & Decor</option>
+                                                </select>
+                                            </div>
+                                            <!-- Price -->
+                                            <div class="mb-3">
+                                                <label for="price" class="form-label fw-semibold">Price ($)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input type="number" step="0.01" class="form-control" id="price" name="price" value="<%= product.price %>" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                            <!-- Quantity -->
+                                            <div class="mb-3">
+                                                <label for="quantity" class="form-label fw-semibold">Quantity</label>
+                                                <input type="number" class="form-control" id="quantity" name="quantity" value="<%= product.quantity %>" placeholder="0" required>
+                                            </div>
+                                            <!-- Sold -->
+                                            <div class="mb-3">
+                                                <label for="sold" class="form-label fw-semibold">Sold Count/Status</label>
+                                                <input type="text" class="form-control" id="sold" name="sold" value="<%= product.sold %>" placeholder="e.g. 0">
+                                            </div>
+                                            <!-- Image -->
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label fw-semibold">Product Image URL</label>
+                                                <input type="text" class="form-control" id="image" name="image" value="<%= product.image %>" placeholder="https://example.com/image.jpg">
+                                                <div class="mt-2 text-center border rounded p-2 bg-light">
+                                                    <img src="<%= product.image %>" alt="Preview" style="max-height: 150px; max-width: 100%;">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mt-4 text-end">
+                                            <hr class="mb-4">
+                                            <button type="submit" class="btn btn-primary px-5">Update Product</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <%- include('../layout/scripts.ejs') %>
+    </body>
+
+    </html>

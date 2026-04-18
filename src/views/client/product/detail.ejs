@@ -1,0 +1,148 @@
+<%- include('../layout/head.ejs') %>
+
+<body>
+    <%- include('../layout/header.ejs') %>
+
+    <main class="container my-5 py-5">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-5 animate__animated animate__fadeIn">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-muted"><%= product.category ? product.category.name : 'Category' %></a></li>
+                <li class="breadcrumb-item active" aria-current="page"><%= product.name %></li>
+            </ol>
+        </nav>
+
+        <div class="row g-5">
+            <!-- Product Images -->
+            <div class="col-12 col-lg-7 animate__animated animate__fadeInLeft">
+                <div class="product-main-image mb-4">
+                    <img id="mainImage" src="<%= product.image ? '/images/products/' + product.image : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=2000' %>" 
+                        class="img-fluid w-100" alt="<%= product.name %>" style="max-height: 600px; object-fit: cover;">
+                </div>
+                <!-- Thumbnail placeholder since we only have one image in DB -->
+                <div class="d-flex gap-3 justify-content-center">
+                    <div class="product-thumb active" onclick="changeImage('<%= product.image ? '/images/products/' + product.image : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=2000' %>', this)">
+                        <img src="<%= product.image ? '/images/products/' + product.image : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=2000' %>" 
+                            class="w-100 h-100" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-12 col-lg-5 animate__animated animate__fadeInRight">
+                <div class="ps-lg-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <span class="badge bg-primary rounded-pill px-3 py-2 text-uppercase tracking-widest"><%= product.category ? product.category.name : 'Exclusive' %></span>
+                        <div class="text-warning small">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-2">(Verified Item)</span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="display-5 fw-bold mb-3 tracking-tighter" style="font-family: 'Playfair Display', serif;"><%= product.name %></h1>
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="display-6 fw-bold text-primary">$<%= product.price.toLocaleString() %></span>
+                        <% if (product.price) { %>
+                            <span class="text-muted text-decoration-line-through fs-4">$<%= (product.price * 1.2).toLocaleString() %></span>
+                            <span class="badge bg-danger rounded-pill px-2">-20%</span>
+                        <% } %>
+                    </div>
+
+                    <p class="text-secondary mb-5 fs-5" style="line-height: 1.8;"><%= product.description || 'No description available for this premium item.' %></p>
+
+                    <div class="row g-3 mb-5">
+                        <div class="col-12 col-sm-6">
+                            <label class="form-label fw-bold small text-uppercase tracking-wider">Quantity</label>
+                            <div class="qty-input">
+                                <button class="qty-btn" onclick="updateQty(-1)"><i class="fas fa-minus"></i></button>
+                                <span id="qtyVal" class="fw-bold fs-5">1</span>
+                                <button class="qty-btn" onclick="updateQty(1)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label class="form-label fw-bold small text-uppercase tracking-wider">SKU</label>
+                            <div class="h-100 d-flex align-items-center">
+                                <span class="text-muted">PRD-<%= product.id %>-LUXE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-premium py-3 fs-5 d-flex align-items-center justify-content-center gap-3">
+                            <i class="fas fa-shopping-bag"></i> ADD TO CART
+                        </button>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-outline-secondary w-100 rounded-pill py-2">
+                                <i class="far fa-heart me-2"></i> WISHLIST
+                            </button>
+                            <button class="btn btn-outline-secondary w-100 rounded-pill py-2">
+                                <i class="fas fa-share-alt me-2"></i> SHARE
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="mt-5 pt-5 border-top">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="benefit-item">
+                                    <i class="fas fa-truck text-primary fs-4"></i>
+                                    <span class="small fw-bold">FREE DELIVERY</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="benefit-item">
+                                    <i class="fas fa-shield-alt text-primary fs-4"></i>
+                                    <span class="small fw-bold">SECURE PAYMENT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products Section -->
+        <section class="mt-5 pt-5">
+            <h2 class="display-6 fw-bold mb-5 tracking-tighter" style="font-family: 'Playfair Display', serif;">You May Also Like</h2>
+            <div class="row g-4 mb-5">
+                <!-- Related Product Item -->
+                <div class="col-6 col-lg-3">
+                    <div class="product-card fade-in-up">
+                        <div class="product-image-container">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000" class="product-image" alt="Sneakers">
+                        </div>
+                        <div class="p-4">
+                            <h5 class="mb-1 text-heading">Velocity Crimson</h5>
+                            <span class="fs-5 fw-bold text-primary">$180.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- ... other related Products (Simplified) -->
+            </div>
+        </section>
+    </main>
+
+    <%- include('../layout/footer.ejs') %>
+    <%- include('../layout/scripts.ejs') %>
+
+    <script>
+        function changeImage(src, thumb) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+        let qty = 1;
+        function updateQty(delta) {
+            qty = Math.max(1, qty + delta);
+            document.getElementById('qtyVal').innerText = qty;
+        }
+    </script>
+</body>
+</html>

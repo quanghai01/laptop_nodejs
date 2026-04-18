@@ -1,0 +1,29 @@
+<%- include('../layout/head.ejs') %>
+
+    <body>
+        <%- include('../layout/sidebar.ejs') %>
+            <div id="content">
+                <%- include('../layout/navbar.ejs') %>
+                    <div class="main-container">
+                        <div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+                            <div>
+                                <h2 class="fw-bold mb-1">Order</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="/admin/dashboard"
+                                                class="text-decoration-none text-secondary">Dashboard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Order</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary shadow-sm"><i class="fas fa-download me-2"></i> Generate
+                                    Report</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <%- include('../layout/scripts.ejs') %>
+    </body>
+
+    </html>
